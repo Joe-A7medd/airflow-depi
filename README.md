@@ -48,9 +48,54 @@ with DAG (
         task_id = 'random_number',
         python_callable = random_number
     )
-
-
-
-
-
     task_current_date >> task_print_name >> task_random_number
+```
+## How to Run (with Docker)
+
+1. Make sure you have _Docker_ and _Docker Compose_ installed.  
+2. Start Airflow using:
+   ```bash
+   docker-compose up -d
+    ```
+   Open the Airflow web UI:
+ http://localhost:8080
+
+Username: airflow
+Password: airflow
+
+Enable the DAG named Airflow_Depi.
+
+Trigger the DAG and check the logs for each task.
+
+The random numbers are saved to `/tmp/random_number.txt`
+
+Example content:
+Generated number: 4382
+Generated number: 9201
+
+## Screenshots
+
+### DAG Graph
+![DAG Graph](https://github.com/user-attachments/assets/69d3679b-60d0-4ae4-b558-461633ec52d7)
+
+### Task Logs
+![Task Log 1](https://github.com/user-attachments/assets/de8b7b38-baa8-4c79-a058-79519ab0470a)
+![Task Log 2](https://github.com/user-attachments/assets/8b553e78-7764-473f-9016-ff1af6d954c8)
+![Task Log 3](https://github.com/user-attachments/assets/49fd5ea8-df9d-4859-b6b3-ba72700ce84c)
+
+### Output File
+![Output File](https://github.com/user-attachments/assets/fe2dd1ec-cac7-489d-9535-c54297d112fa)
+
+##  Notes
+- The DAG runs **every 1 minute** (`schedule_interval=timedelta(minutes=1)`)  
+- `catchup=False` ensures only future runs are triggered  
+- Make sure Docker and Docker Compose are installed  
+- Username and Password for Airflow web UI are both: `airflow`  
+- Screenshots are in the `screenshots/` folder  
+- Output random numbers are saved to `/tmp/random_number.txt`  
+- Project created as part of **Depi training**
+
+
+
+
+
